@@ -1,12 +1,11 @@
-﻿<?php echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-	<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" 
-        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
-		
+﻿<?php 	
+
 	if (!empty($_GET['url'])){
 		$form = $_GET;
-		
-		require_once 'pagerank.php';
-		$pr = getpagerank($form['url']);
+
+		require_once 'lib/php-google-pagerank-master/PHPGooglePageRank.php';
+		$pgpr = new PHPGooglePageRank($form['url']);
+		$pr = $pgpr->get();
 		
 		if ($pr===0 || !empty($pr)){
 			$form['pr'] = $pr;
@@ -18,7 +17,8 @@
 		$form = array_merge(array('pr' => 'nežinomas'), $form);
 	}
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html?
+<html>
 <head>
 	<title>Koks yra mano svetainės puslapio Google PageRank (PR)?</title>
 	<meta name="description" content="Koks mano Google PageRank? Sužinok!"/>
@@ -59,7 +59,8 @@
         <div class="footer">
 			<div class="left">
 				<div>
-					&copy;&nbsp;2009&nbsp;<a href="http://www.kran.lt" title="kran">kran.lt</a> &nbsp;|&nbsp; <a href="http://pr.kran.lt/">Koks yra mano svetainės Google PageRank?</a> v. 0.1
+					&copy;&nbsp;2009 - 2014&nbsp;<a href="http://www.kran.lt" title="kran">kran.lt</a> 
+					&nbsp;|&nbsp; <a href="http://pr.kran.lt/">Koks yra mano svetainės Google PageRank?</a> v. 1.0
 				</div>
         
 				<div class="links">
