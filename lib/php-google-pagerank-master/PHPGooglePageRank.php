@@ -22,7 +22,6 @@ class PHPGooglePageRank {
 
 
     $request = 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch='.$this->_getCheckSum().'&features=Rank&q=info:'.$this->_url;
-    echo $request.'<br>';
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $request);
